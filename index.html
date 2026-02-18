@@ -68,6 +68,11 @@
     </div>
 
     <script>
+        function showMoney(input) {
+            input = Math.round(input * 100) / 100;
+            return input;
+        }
+
         window.onload = function JoeMenu() {
             alert("Joe's Hotdog Stand Menu\n- Hotdogs: $5.25\n- Fries: $3.75\n- Beverage: $2.50\nSpecials:\n- Meal Deal: 1 hotdog, 1 french fries, and 1 drink for $10!\n- 10% discount for any order over $30!");
         
@@ -112,13 +117,13 @@
             document.getElementById('hotdog-count').textContent = numDogs;
             document.getElementById('fries-count').textContent = numFries;
             document.getElementById('soda-count').textContent = numSoda;
-            document.getElementById('hotdog-price').textContent = hotdogPriceTotal;
-            document.getElementById('fries-price').textContent = friesPriceTotal;
-            document.getElementById('soda-price').textContent = sodaPriceTotal;
-            document.getElementById('tax-amount').textContent = tax;
-            document.getElementById('discount-amount').textContent = discount;
-            document.getElementById('subtotal-amount').textContent = subtotal;
-            document.getElementById('total-amount').textContent = total;
+            document.getElementById('hotdog-price').textContent = showMoney(hotdogPriceTotal);
+            document.getElementById('fries-price').textContent = showMoney(friesPriceTotal);
+            document.getElementById('soda-price').textContent = showMoney(sodaPriceTotal);
+            document.getElementById('tax-amount').textContent = showMoney(tax);
+            document.getElementById('discount-amount').textContent = showMoney(discount);
+            document.getElementById('subtotal-amount').textContent = showMoney(subtotal);
+            document.getElementById('total-amount').textContent = showMoney(total);
         };
     </script>
 
