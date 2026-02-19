@@ -41,16 +41,22 @@
                 <td id="soda-price"></td>
             </tr>
             <tr>
+                <td>Subtotal</td>
+                <td>-</td>
+                <td>-</td>
+                <td id="subtotal-amount"></td>
+            </tr>
+            <tr>
                 <td>Discount</td>
                 <td>-</td>
                 <td>-</td>
                 <td id="discount-amount"></td>
             </tr>
             <tr>
-                <td>Subtotal</td>
+                <td>Subtotal Post Discount</td>
                 <td>-</td>
                 <td>-</td>
-                <td id="subtotal-amount"></td>
+                <td id="subtotalPostDisc-amount"></td>
             </tr>
             <tr>
                 <td>Tax</td>
@@ -95,35 +101,34 @@
             let numSoda = prompt("How many beverages would you like?");
             let discount = 0;
             let total = 0;
-            let subtotal = 0;
             let tax = 0;
-            let hotdogPrice = 5.25;
-            let friesPrice = 3.75;
-            let sodaPrice = 2.50
-            let hotdogPriceTotal = 0;
-            let friesPriceTotal = 0;
-            let sodaPriceTotal = 0;
+            const hotdogPrice = 5.25;
+            const friesPrice = 3.75;
+            const sodaPrice = 2.50
+            let hotdogPriceTotal = numDogs * 5.25;
+            let friesPriceTotal = numFries * 3.75;
+            let sodaPriceTotal = numSoda * 2.50;
+            let subtotal = hotdogPriceTotal + friesPriceTotal + sodaPriceTotal;
+            let subtotalPostDiscount = subtotal;
 
             /* meal deal and non-meal deal case */
             if (numDogs == 1 && numFries == 1 && numSoda == 1) {
                 discount = 1.50;
-                subtotal = 10.00;
+                subtotal = 11.5;
+                subtotalPostDiscount = 10.00;
                 total = 10.63;
                 tax = 0.63;
                 hotdogPriceTotal = 5.25;
                 sodaPriceTotal = 2.50;
                 friesPriceTotal = 3.75;
 
-            } else {
-                hotdogPriceTotal = numDogs * 5.25;
-                friesPriceTotal = numFries * 3.75;
-                sodaPriceTotal = numSoda * 2.50;
-                subtotal = hotdogPriceTotal + friesPriceTotal + sodaPriceTotal;
+            } else if (subtotal >= 30) {
                 /* order of $30 or more */
-                if (subtotal >= 30) {
-                    discount = subtotal * 0.1;
-                    subtotal = subtotal - discount;
-                }
+                discount = subtotal * 0.1;
+                subtotalPostDiscount = subtotal - discount;
+                tax = subtotalPostDiscount * 0.0625;
+                total = subtotalPostDiscount * 1.0625;
+            } else {
                 tax = subtotal * 0.0625;
                 total = subtotal * 1.0625;
             }
@@ -137,6 +142,7 @@
             document.getElementById('tax-amount').textContent = showMoney(tax);
             document.getElementById('discount-amount').textContent = showMoney(discount);
             document.getElementById('subtotal-amount').textContent = showMoney(subtotal);
+            document.getElementById('subtotalPostDisc-amount').textContent = showMoney(subtotalPostDiscount);
             document.getElementById('total-amount').textContent = showMoney(total);
         };
     </script>
