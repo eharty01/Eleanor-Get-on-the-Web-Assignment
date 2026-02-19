@@ -76,10 +76,9 @@
 
             if (cents == 0) {
                 output = "$" + input + ".00";
+            } else if (((cents * 100) % 10) == 0) {
+                output = "$" + input + "0";
             } else {
-                if (((cents * 100) % 10) == 0) {
-                    output = "$" + input + "0";
-                }
                 output = "$" + input;
             }
 
